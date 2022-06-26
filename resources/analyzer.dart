@@ -228,7 +228,12 @@ void main(args) async {
       for (final jc in jsonContent["packages"]) {
         var rootUri = jc["rootUri"];
         if (jc.containsKey("packageUri")) {
-          rootUri = ctx.join(rootUri, jc["packageUri"]);
+          // rootUri = ctx.join(rootUri, jc["packageUri"]);
+          if (rootUri == "../") {
+            rootUri = rootUri + jc["packageUri"];
+          } else {
+            rootUri = rootUri + '/' + jc["packageUri"];
+          }
         }
         packages[rootUri] = 'package:' + jc["name"] + '/';
         String normalizedPath = ctx.normalize(ctx.fromUri(rootUri));
