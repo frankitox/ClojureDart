@@ -169,8 +169,9 @@
             (println (title "Dumping type information (it may take a while)"))
             (when (exec {:out (java.lang.ProcessBuilder$Redirect/to lib-info-edn)}
                     bin "pub" "run" (.getPath analyzer-dart))
-              (.delete lib-info-edn)
-              (System/exit 1))))))))
+                    bin "pub" "run" (str ".clojuredart"
+                                         (java.io.File/separator)
+                                         "analyzer.dart"))))))))
 
 (defn compile-cli
   [& {:keys [watch namespaces flutter] :or {watch false}}]
