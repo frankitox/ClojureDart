@@ -214,9 +214,8 @@ void main(args) async {
   late Directory dir;
   if (args.isEmpty) dir = Directory.current;
   else dir = Directory(args.first);
-  Uri projectDirectoryUri = dir.uri;
   final collection = AnalysisContextCollection(
-    includedPaths: [ctx.normalize(projectDirectoryUri.path)],
+    includedPaths: [ctx.normalize(dir.path)],
     resourceProvider: resourceProvider
   );
   final includedDependenciesPaths = <String>[];
