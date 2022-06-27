@@ -3628,7 +3628,7 @@
 (defn relativize-lib [^String src ^String target]
   (if (<= 0 (.indexOf target ":"))
     target
-    (loop [[s & ss] (str/split src #"/") [t & ts :as all-ts] (str/split target #"/")]
+    (loop [[s & ss] (-> src (str/replace "\\" "/") (str/split #"/")) [t & ts :as all-ts] (str/split target #"/")]
       (if (and (some? ss) (= s t))
         (recur ss ts)
         (str/join "/" (concat (map (constantly "..") ss) all-ts))))))
